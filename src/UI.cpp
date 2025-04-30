@@ -9,6 +9,20 @@
 
 #include "CelestialBody.h"
 
+namespace
+{
+  const int UIlargeHeaderFontSize = 60;
+  const int UIheaderFontSize = 40;
+  const int UImediumFontSize = 30;
+  const int UIsmallFontSize = 20;
+  const int UIspacingSize = 2;
+
+  const float UIheaderFontGap = 40;
+  const float UImediumGap = 40;
+  const float UIsmallGap = 24;
+  const float UIedgeGap = 10;
+}
+
 void DrawUI(Font& font, std::vector<CelestialBody>& SolarSystem, int days, int timeScale, bool displayInput)
 {
   // Time information
@@ -42,20 +56,15 @@ void drawTime(Font& font, int days, int timeScale)
   speed += "x";
   UI.push_back(speed);
 
-  // UI modifiers
-  int UIfontSize = 38;
-  int UIspacingSize = 2;
-  float UIgap = 40;
-
   // UI location vectors
-  Vector2 UIstart = { 10, 40 };
+  Vector2 UIstart = { UIedgeGap, 40 };
   Vector2 UIcurrent = UIstart;
 
   // Draw UI members
   for (const auto iter : UI)
   {
-    DrawTextEx(font, iter.c_str(), UIcurrent, UIfontSize, UIspacingSize, WHITE);
-    UIcurrent.y += UIgap;
+    DrawTextEx(font, iter.c_str(), UIcurrent, UIheaderFontSize, UIspacingSize, WHITE);
+    UIcurrent.y += UImediumGap;
   }
 }
 
@@ -71,7 +80,7 @@ void drawFacts(Font& font, std::vector<CelestialBody>& SolarSystem, int index)
   mass += "kg";
   UI.push_back(mass);
 
-  std::string radius = "Radius ";
+  std::string radius = "Radius: ";
   radius += scientificString(std::to_string(SolarSystem[index].getUnscaledRadius()));
   radius += "km";
   UI.push_back(radius);
@@ -89,35 +98,33 @@ void drawFacts(Font& font, std::vector<CelestialBody>& SolarSystem, int index)
   std::string orbit = "Orbit Length: ";
   orbit += fixedString(std::to_string(SolarSystem[index].getOrbitRotation()));
   orbit += " days";
-  UI.push_back(orbit);
+  if (SolarSystem[index].getName() != "Sun")
+    UI.push_back(orbit);
 
   std::string day = "Day Length: ";
   day += fixedString(std::to_string(SolarSystem[index].getAxisRotation()));
   day += " hours";
-  UI.push_back(day);
+  if (SolarSystem[index].getName() != "Sun")
+    UI.push_back(day);
 
   std::string satellites = "Number of Moons: ";
   satellites += std::to_string(SolarSystem[index].getSatellites());
-  UI.push_back(satellites);
-
-  // UI modifiers
-  int UIfontSize = 30;
-  int UIspacingSize = 2;
-  float UIgap = 40;
+  if (SolarSystem[index].getName() != "Sun")
+    UI.push_back(satellites);
 
   // UI location vectors
-  Vector2 UIstart = { 10, static_cast<float>(GetScreenHeight() - ((UI.size() + 2)) * UIgap) };
+  Vector2 UIstart = { UIedgeGap, static_cast<float>(GetScreenHeight() - ((UI.size() + 2)) * UImediumGap) };
   Vector2 UIcurrent = UIstart;
 
-  // Draw heading
-  DrawTextEx(font, header.c_str(), UIstart, 60, UIspacingSize, WHITE);
-  UIcurrent.y += UIgap * 2;
+  // Draw header
+  DrawTextEx(font, header.c_str(), UIstart, UIlargeHeaderFontSize, UIspacingSize, WHITE);
+  UIcurrent.y += UImediumGap * 2;
 
   // Draw UI members
   for (const auto iter : UI)
   {
-    DrawTextEx(font, iter.c_str(), UIcurrent, UIfontSize, UIspacingSize, WHITE);
-    UIcurrent.y += UIgap;
+    DrawTextEx(font, iter.c_str(), UIcurrent, UImediumFontSize, UIspacingSize, WHITE);
+    UIcurrent.y += UImediumGap;
   }
 }
 
@@ -148,24 +155,19 @@ void drawInput(Font& font)
   std::string timeScaleDownBig = "\"Shift -\": Decrease time scale faster";
   UI.push_back(timeScaleDownBig);
 
-  // UI modifiers
-  int UIfontSize = 20;
-  int UIspacingSize = 2;
-  float UIgap = 24;
-
   // UI location vectors
   Vector2 UIstart = { static_cast<float>(GetScreenWidth() - 400), 40 };
   Vector2 UIcurrent = UIstart;
 
-  // Draw heading
-  DrawTextEx(font, header.c_str(), UIstart, 20, UIspacingSize, WHITE);
-  UIcurrent.y += UIgap * 2;
+  // Draw header
+  DrawTextEx(font, header.c_str(), UIstart, UIsmallFontSize, UIspacingSize, WHITE);
+  UIcurrent.y += UIsmallGap * 2;
 
   // Draw UI members
   for (const auto iter : UI)
   {
-    DrawTextEx(font, iter.c_str(), UIcurrent, UIfontSize, UIspacingSize, WHITE);
-    UIcurrent.y += UIgap;
+    DrawTextEx(font, iter.c_str(), UIcurrent, UIsmallFontSize, UIspacingSize, WHITE);
+    UIcurrent.y += UIsmallGap;
   }
 }
 
