@@ -3,11 +3,18 @@ FROM archlinux:base-devel
 
 # Update distro and install C++ packages
 RUN pacman -Syu  --noconfirm \
-    lldb \
     git \
+    gdb \
+    gcc \
     clang \
+    lldb \
+    lldb-mi \
     ninja \
     cmake \
+    cppcheck \
+    valgrind \
+    doxygen \
+    bat \
     && pacman -Scc --noconfirm
 
 # Install raylib dependencies

@@ -1,0 +1,10 @@
+{
+  "name": "Raylib C++ Environment",
+  "build": { "dockerfile": "Dockerfile" },
+  "customizations": {
+    "vscode": {
+      "settings": { "C_Cpp.intelliSenseEngine": "disabled" },
+      "extensions": ["ms-vscode.cpptools-extension-pack", "ms-vscode.cmake-tools", "llvm-vs-code-extensions.vscode-clangd"]
+    }
+  }
+}
