@@ -1,6 +1,6 @@
 # Solar-System
 
-Solar-Sytem is a physically based astrophysics simualtor and game engine utilizing raylib as an OpenGL wrapper.
+Solar-System is a physically based astrophysics simulator and game engine utilizing raylib as an OpenGL wrapper.
 
 ## Contributing
 
