@@ -2,9 +2,12 @@
 
 Solar-System is a physically based astrophysics simulator and game engine utilizing raylib as an OpenGL wrapper.
 
+![Solar-System](./images/solar-system.gif)
+
 ## Building
 
 `cmake -B build`
+
 `cmake --build build`
 
 ### Credits
